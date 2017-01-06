@@ -43,6 +43,20 @@ config.globals = {
   '__TEST__'     : config.env === 'test'
 }
 
+// ------------------------------------
+// Utilities
+// ------------------------------------
+function base () {
+  const args = [config.path_base].concat([].slice.call(arguments))
+  return path.resolve.apply(path, args)
+}
+
+config.paths = {
+  base   : base,
+  client : base.bind(null, config.dir_client),
+  dist   : base.bind(null, config.dir_dist)
+}
+
 // ========================================================
 // Environment Configuration
 // ========================================================

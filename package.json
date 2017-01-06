@@ -51,6 +51,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "ip": "^1.1.4",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-redux": "^5.0.1",

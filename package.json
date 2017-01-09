@@ -7,7 +7,7 @@
     "presetup": "npm i shelljs",
     "setup": "node ./setup.js",
     "postsetup": "rm -rf ./setup.js && npm un shelljs",
-    "start": "cd ./config && webpack-dev-server",
+    "start": "webpack-dev-server --config ./config/webpack.config.js",
     "test": "ava \"test/**/*.test.js\" --verbose",
     "test:dev": "ava \"test/**/*.test.js\" --verbose --watch"
   },

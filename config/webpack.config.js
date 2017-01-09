@@ -1,6 +1,6 @@
-var webpack = require('webpack');
-var path = require('path');
-
+var path = require('path')
+var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 var project = require('./project.config')
 
 var __DEV__ = project.globals.__DEV__
@@ -20,21 +20,18 @@ module.exports = {
   },
   output: {
     path: project.paths.dist(),
-    filename: 'index.js',
-    publicPath: project.dir_dist,
-    libraryTarget: 'umd'
+    filename: 'bundle.js',
+    publicPath : project.compiler_public_path
   },
-
   module: {
     loaders: [{
       test: /\.js$/,
       loaders: ['react-hot', 'babel'],
       include: [
-        project.paths.client(),
+        project.paths.client()
       ]
-    }],
+    }]
   },
-
   resolve: {
     modulesDirectories: ['node_modules']
   },
@@ -42,12 +39,15 @@ module.exports = {
     hot: true,
     host:'0.0.0.0',
     port:project.server_port,
-    contentBase : project.paths.client()
+    contentBase: project.paths.dist()
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: project.paths.client('index.html')
+    })
   ],
   watch: project.env === 'development',
   devtool: 'source-map'
-};
+}
 

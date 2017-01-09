@@ -16,11 +16,12 @@ module.exports = {
         `webpack-dev-server/client?${project.compiler_public_path}`,
         'webpack/hot/only-dev-server',
         APP_ENTRY
-      ] : [APP_ENTRY]
+      ] : [APP_ENTRY],
+    vendor : project.compiler_vendors
   },
   output: {
     path: project.paths.dist(),
-    filename: 'bundle.js',
+    filename: '[name].js',
     publicPath : project.compiler_public_path
   },
   module: {
@@ -45,6 +46,9 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: project.paths.client('index.html')
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names : ['vendor']
     })
   ],
   watch: project.env === 'development',

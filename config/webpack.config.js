@@ -8,7 +8,7 @@ var __PROD__ = project.globals.__PROD__
 var __TEST__ = project.globals.__TEST__
 
 const APP_ENTRY = project.paths.client()
-console.log(project.paths.dist())
+
 module.exports = {
   entry: {
     main: __DEV__
@@ -42,7 +42,7 @@ module.exports = {
     hot: true,
     host:'0.0.0.0',
     port:project.server_port,
-    contentBase : project.paths.base()
+    contentBase : project.paths.client()
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()

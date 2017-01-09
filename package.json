@@ -6,6 +6,7 @@
   "scripts": {
     "presetup": "npm i shelljs",
     "setup": "node ./setup.js",
+    "build": "NODE_ENV=production webpack --config ./config/webpack.config.js --color -p --progress",
     "postsetup": "rm -rf ./setup.js && npm un shelljs",
     "start": "webpack-dev-server --config ./config/webpack.config.js",
     "test": "ava \"test/**/*.test.js\" --verbose",

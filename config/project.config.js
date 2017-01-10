@@ -29,6 +29,9 @@ const config = {
   compiler_vendors : [
     'react',
     'react-redux',
+    'react-router',
+    'react-router-redux',
+    'redux-saga',
     'redux'
   ]
 }

@@ -3,7 +3,7 @@ import { IndexLink, Link } from 'react-router'
 
 export const HomeView = () => (
   <div>
-    <h4>Welcome!</h4>
+    <h4>Welcome!!!</h4>
   </div>
 )
 

@@ -1,11 +1,20 @@
-/*import React from 'react';
-
-import ThallyBox from './ThallyBox';
-
-export default ThallyBox;*/
-
 import React from 'react'
-import {render} from 'react-dom'
-import ThallyBox from './ThallyBox';
+import { render } from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import createStore from './store/createStore';
 
-render(<ThallyBox/>, document.getElementById('container'));
+//import App from './containers/App'
+
+const store = createStore()
+
+const routes = require('./routes/index').default(store)
+
+render(
+  <Provider store={store}>
+    <div style={{ height: '100%' }}>
+      <Router history={browserHistory} children={routes} />
+    </div>
+  </Provider>,
+  document.getElementById('container')
+);

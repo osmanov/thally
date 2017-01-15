@@ -12,13 +12,13 @@ export const COUNTER_DOUBLE = 'COUNTER_DOUBLE'
 export function increment(value = 1) {
   return {
     type: COUNTER_INCREMENT,
-    payload: value
+    payload: value,
   }
 }
 
 export function double() {
   return {
-    type: COUNTER_DOUBLE
+    type: COUNTER_DOUBLE,
   }
 }
 
@@ -39,14 +39,14 @@ export function double() {
 
 export const actions = {
   increment,
-  double
+  double,
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [COUNTER_INCREMENT]: (state, action) => state + action.payload
+  [COUNTER_INCREMENT]: (state, action) => state + action.payload,
 }
 
 // ------------------------------------
@@ -62,8 +62,8 @@ export default function counterReducer(state = initialState, action) {
 // ------------------------------------
 // Sagas
 // ------------------------------------
-export function *doubleAsync() {
-  while (true) {
+export function* doubleAsync() {
+  while (true) {  // eslint-disable-line no-constant-condition
     yield take(COUNTER_DOUBLE)
     const state = yield select()
     yield asyncWait()
@@ -77,5 +77,5 @@ const asyncWait = () => new Promise((resolve) => {
 })
 
 export const sagas = [
-  doubleAsync
+  doubleAsync,
 ]

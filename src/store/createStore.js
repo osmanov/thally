@@ -1,14 +1,15 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import makeRootReducer from './reducers';
+import { createStore, applyMiddleware } from 'redux'
 import { browserHistory } from 'react-router'
-import createLogger from 'redux-logger';
+import createLogger from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 import { updateLocation } from './location'
+import makeRootReducer from './reducers'
+
 
 const sagaMiddleware = createSagaMiddleware()
-const logger=createLogger();
+const logger = createLogger()
 
-export default (initialState={})=>{
+export default (initialState = {}) => {
   const middleware = [sagaMiddleware]
 
   if (__DEV__) {
@@ -30,10 +31,11 @@ export default (initialState={})=>{
 
   // To unsubscribe, invoke `store.unsubscribeHistory()` anytime
   store.unsubscribeHistory = browserHistory.listen(updateLocation(store))
-  
+
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('./reducers', () => {
+      // eslint-disable-next-line global-require
       const reducers = require('./reducers').default
       store.replaceReducer(reducers(store.asyncReducers))
     })

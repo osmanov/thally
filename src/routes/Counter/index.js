@@ -1,5 +1,5 @@
 import { injectReducer } from '../../store/reducers'
-import { injectSagas } from '../../store/sagas'
+
 export default (store) => ({
   path: 'counter',
   /*  Async getComponent is only invoked when route matches   */
@@ -11,11 +11,9 @@ export default (store) => ({
           dependencies for bundling   */
       const Counter = require('./containers/CounterContainer').default
       const reducer = require('./modules/counter').default
-      const sagas = require('./modules/counter').sagas
 
       /*  Add the reducer to the store on key 'counter'  */
       injectReducer(store, { key: 'counter', reducer })
-      injectSagas(store, { key: 'counter', sagas })
 
       /*  Return getComponent   */
       cb(null, Counter)

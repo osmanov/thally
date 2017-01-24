@@ -12,11 +12,11 @@ const APP_ENTRY = project.paths.client()
 module.exports = {
   entry: {
     main: __DEV__
-      ? ['babel-polyfill',
+      ? [
         `webpack-dev-server/client?${project.compiler_public_path}`,
         'webpack/hot/only-dev-server',
         APP_ENTRY
-      ] : ['babel-polyfill',APP_ENTRY],
+      ] : [APP_ENTRY],
     vendor : project.compiler_vendors
   },
   output: {

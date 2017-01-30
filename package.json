@@ -6,7 +6,9 @@
   "scripts": {
     "presetup": "npm i shelljs",
     "setup": "node ./setup.js",
-    "build": "NODE_ENV=production webpack --config ./config/webpack.config.js --color -p --progress",
+    "clean": "rm -rf dist",
+    "build:webpack": "NODE_ENV=production webpack --config ./config/webpack.config.js --color  --progress",
+    "build": "npm run clean && npm run build:webpack",
     "postsetup": "rm -rf ./setup.js && npm un shelljs",
     "start": "webpack-dev-server --config ./config/webpack.config.js",
     "test": "ava \"test/**/*.test.js\" --verbose",
@@ -66,7 +68,6 @@
     "react-dom": "^15.2.1",
     "react-redux": "^5.0.1",
     "react-router": "^3.0.0",
-    "react-router-redux": "^4.0.7",
     "redux": "^3.5.2",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.2.0"

@@ -30,7 +30,6 @@ const config = {
     'react',
     'react-redux',
     'react-router',
-    'react-router-redux',
     'redux'
   ]
 }
@@ -39,7 +38,9 @@ const config = {
 // Environment
 // ------------------------------------
 config.globals = {
-  'NODE_ENV'     : config.env,
+  'process.env': {
+    NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+  },
   '__DEV__'      : config.env === 'development',
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test'

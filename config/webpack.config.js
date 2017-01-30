@@ -9,6 +9,46 @@ var __TEST__ = project.globals.__TEST__
 
 const APP_ENTRY = project.paths.client()
 
+
+let plugins=[
+  new webpack.DefinePlugin(project.globals),
+  new webpack.optimize.CommonsChunkPlugin({
+    names : ['vendor']
+  })
+]
+
+
+
+if (__DEV__) {
+  plugins.push(new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: project.paths.client('index.html'),
+    })
+  )
+}
+
+if (__PROD__) {
+  plugins.push(
+    new HtmlWebpackPlugin({
+      template: project.paths.client('index.html'),
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      }
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin()
+  )
+}
+
 module.exports = {
   entry: {
     main: __DEV__
@@ -45,16 +85,7 @@ module.exports = {
       index: project.compiler_public_path
     }
   },
-  plugins: [
-    new webpack.DefinePlugin(project.globals),
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: project.paths.client('index.html')
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      names : ['vendor']
-    })
-  ],
+  plugins: plugins,
   watch: project.env === 'development',
   devtool: 'source-map'
 }

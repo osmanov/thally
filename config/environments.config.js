@@ -9,5 +9,6 @@ module.exports = {
   // ======================================================
   production : (config) => ({
     compiler_devtool         : null,
+    compiler_public_path     : '/'
   })
 }

@@ -74,6 +74,7 @@ module.exports = {
     }]
   },
   resolve: {
+    root: project.paths.client(),
     modulesDirectories: ['node_modules']
   },
   devServer: {

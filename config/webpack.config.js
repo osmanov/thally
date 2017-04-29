@@ -1,11 +1,11 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var project = require('./project.config')
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const project = require('./project.config')
 
-var __DEV__ = project.globals.__DEV__
-var __PROD__ = project.globals.__PROD__
-var __TEST__ = project.globals.__TEST__
+const __DEV__ = project.globals.__DEV__
+const __PROD__ = project.globals.__PROD__
+const __TEST__ = project.globals.__TEST__
 
 const APP_ENTRY = project.paths.client()
 
@@ -13,10 +13,9 @@ const APP_ENTRY = project.paths.client()
 let plugins=[
   new webpack.DefinePlugin(project.globals),
   new webpack.optimize.CommonsChunkPlugin({
-    names : ['vendor']
-  })
+    names: ['vendor'],
+  }),
 ]
-
 
 
 if (__DEV__) {
@@ -53,14 +52,14 @@ module.exports = {
       ? [
         `webpack-dev-server/client?${project.compiler_public_path}`,
         'webpack/hot/only-dev-server',
-        APP_ENTRY
+        APP_ENTRY,
       ] : [APP_ENTRY],
-    vendor : project.compiler_vendors
+    vendor: project.compiler_vendors,
   },
   output: {
     path: project.paths.dist(),
     filename: '[name].js',
-    publicPath : project.compiler_public_path
+    publicPath: project.compiler_public_path,
   },
   module: {
     rules: [{
@@ -86,16 +85,16 @@ module.exports = {
   },
   devServer: {
     hot: true,
-    host:'0.0.0.0',
+    host: '0.0.0.0',
     disableHostCheck: true,
-    port:project.server_port,
+    port: project.server_port,
     contentBase: project.paths.dist(),
     historyApiFallback: {
-      index: project.compiler_public_path
-    }
+      index: project.compiler_public_path,
+    },
   },
-  plugins: plugins,
+  plugins,
   watch: project.env === 'development',
-  devtool: 'source-map'
+  devtool: 'source-map',
 }
 

@@ -32,10 +32,10 @@ function animateProgress(message, amountOfArrows = 10, isStatic) {
   }
 
   let i = 0
-  return setInterval(function () {
+  return setInterval(() => {
     updateReadedLine()
     i = (i + 1) % (amountOfArrows + 1)
-    const arrow = '<' + new Array(i + 1).join('=') + '>'
+    const arrow = `<${new Array(i + 1).join('=')}>`
     process.stdout.write(message + arrow)
   }, 500)
 }

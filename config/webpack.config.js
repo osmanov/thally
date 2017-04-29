@@ -42,10 +42,8 @@ if (__PROD__) {
         minifyJS: true,
         minifyCSS: true,
         minifyURLs: true,
-      }
-    }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin()
+      },
+    })
   )
 }
 
@@ -65,17 +63,26 @@ module.exports = {
     publicPath : project.compiler_public_path
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
-      loaders: ['react-hot', 'babel'],
+      use: [
+        {
+          loader: 'react-hot-loader',
+        },
+        {
+          loader: 'babel-loader',
+        },
+      ],
       include: [
-        project.paths.client()
-      ]
-    }]
+        project.paths.client(),
+      ],
+    }],
   },
   resolve: {
-    root: project.paths.client(),
-    modulesDirectories: ['node_modules']
+    modules: [
+      project.paths.client(),
+      'node_modules',
+    ],
   },
   devServer: {
     hot: true,

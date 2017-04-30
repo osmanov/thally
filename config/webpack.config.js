@@ -50,8 +50,7 @@ module.exports = {
   entry: {
     main: __DEV__
       ? [
-        `webpack-dev-server/client?${project.compiler_public_path}`,
-        'webpack/hot/only-dev-server',
+        'react-hot-loader/patch',
         APP_ENTRY,
       ] : [APP_ENTRY],
     vendor: project.compiler_vendors,
@@ -66,7 +65,7 @@ module.exports = {
       test: /\.js$/,
       use: [
         {
-          loader: 'react-hot-loader',
+          loader: 'react-hot-loader/webpack',
         },
         {
           loader: 'babel-loader',
@@ -86,9 +85,11 @@ module.exports = {
   devServer: {
     hot: true,
     host: '0.0.0.0',
+    compress: true,
     disableHostCheck: true,
     port: project.server_port,
     contentBase: project.paths.dist(),
+    headers: { 'Access-Control-Allow-Origin': '*' },
     historyApiFallback: {
       index: project.compiler_public_path,
     },
